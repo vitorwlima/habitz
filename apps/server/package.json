@@ -1,0 +1,24 @@
+{
+	"name": "@apps/habitz-server",
+	"module": "index.ts",
+	"type": "module",
+	"scripts": {
+		"dev": "bun --watch src/server.ts"
+	},
+	"exports": {
+		".": "./src/index.ts"
+	},
+	"devDependencies": {
+		"bun-types": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"dependencies": {
+		"@elysiajs/cors": "^0.8.0",
+		"@elysiajs/trpc": "^0.8.0",
+		"@trpc/server": "^10.45.0",
+		"elysia": "^0.8.10",
+		"zod": "^3.22.4"
+	}
+}

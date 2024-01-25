@@ -1,24 +1,14 @@
 {
-  "name": "habitz-mono",
-  "private": true,
-  "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
-    "prettier": "^3.1.1",
-    "turbo": "latest"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "bun@1.0.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+	"name": "habitz",
+	"private": true,
+	"packageManager": "bun@1.0.0",
+	"workspaces": ["apps/*"],
+	"scripts": {
+		"build": "turbo build",
+		"dev": "turbo dev"
+	},
+	"devDependencies": {
+		"turbo": "latest",
+		"@biomejs/biome": "^1.5.3"
+	}
 }
