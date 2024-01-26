@@ -3,15 +3,23 @@ import type { UseFormProps } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import type { z } from 'zod'
 
-export const useZodForm = <TSchema extends z.ZodType>(
-	props: Omit<UseFormProps<TSchema['_input']>, 'resolver'> & {
-		schema: TSchema
-	},
-) => {
-	const form = useForm<TSchema['_input']>({
+type UseZedForm<FormSchema extends z.ZodType> = Omit<
+	UseFormProps<FormSchema['_input']>,
+	'resolver'
+> & {
+	schema: FormSchema
+	onSubmit: (data: FormSchema['_output']) => void
+}
+
+export const useZodForm = <FormSchema extends z.ZodType>({
+	schema,
+	onSubmit,
+	...props
+}: UseZedForm<FormSchema>) => {
+	const { handleSubmit, ...form } = useForm<FormSchema['_input']>({
 		...props,
-		resolver: zodResolver(props.schema, undefined),
+		resolver: zodResolver(schema),
 	})
 
-	return form
+	return { ...form, handleSubmit: handleSubmit(onSubmit) }
 }

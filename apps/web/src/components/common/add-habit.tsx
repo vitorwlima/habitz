@@ -31,6 +31,13 @@ export const AddHabit: React.FC = () => {
 		defaultValues: {
 			days: [],
 		},
+		onSubmit: (data) => {
+			createHabitMutation.mutate(data, {
+				onSuccess: () => {
+					console.log('success')
+				},
+			})
+		},
 	})
 
 	const selectedDays = watch('days')
@@ -47,14 +54,6 @@ export const AddHabit: React.FC = () => {
 		)
 	}
 
-	const onSubmit = (data: z.infer<typeof addHabitSchema>) => {
-		createHabitMutation.mutate(data, {
-			onSuccess: () => {
-				console.log('success')
-			},
-		})
-	}
-
 	return (
 		<Dialog>
 			<Button asChild>
@@ -64,7 +63,7 @@ export const AddHabit: React.FC = () => {
 				<DialogHeader>
 					<DialogTitle>New Habit</DialogTitle>
 				</DialogHeader>
-				<form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
+				<form className="space-y-2" onSubmit={handleSubmit}>
 					<div className="space-y-1">
 						<Label htmlFor="name">Name</Label>
 						<Input placeholder="My habit..." id="name" {...register('name')} />
