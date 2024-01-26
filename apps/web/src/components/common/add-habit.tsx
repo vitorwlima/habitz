@@ -1,3 +1,5 @@
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
 	Dialog,
 	DialogContent,
@@ -6,14 +8,12 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { DayValue, days } from '@/lib/days'
 import { trpc } from '@/lib/trpc'
 import { useZodForm } from '@/lib/useZedForm'
 import { z } from 'zod'
-import { Button } from '../ui/button'
-import { Checkbox } from '../ui/checkbox'
-import { Input } from '../ui/input'
-import { Label } from '../ui/label'
 
 const addHabitSchema = z.object({
 	name: z.string().min(3),
