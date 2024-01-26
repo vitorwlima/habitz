@@ -11,12 +11,12 @@ export const appRouter = trpc.router({
 		.input(
 			z.object({
 				name: z.string().min(3),
-				reward: z.coerce.number().min(0).max(10),
+				rewardPoints: z.coerce.number().min(0).max(10),
 				days: z.array(z.string()).min(1).max(7),
 			}),
 		)
 		.mutation(({ input }) => {
-			console.log('criando hábito com nome: ', input.name)
+			console.log(input)
 		}),
 })
 

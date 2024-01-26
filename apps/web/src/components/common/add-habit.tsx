@@ -17,7 +17,7 @@ import { z } from 'zod'
 
 const addHabitSchema = z.object({
 	name: z.string().min(3),
-	reward: z.coerce.number().min(0).max(10),
+	rewardPoints: z.coerce.number().min(0).max(10),
 	days: z
 		.array(z.enum([days[0].value, ...days.slice(1).map((day) => day.value)]))
 		.min(1)
@@ -69,13 +69,14 @@ export const AddHabit: React.FC = () => {
 						<Input placeholder="My habit..." id="name" {...register('name')} />
 					</div>
 					<div className="space-y-1 pb-4">
-						<Label htmlFor="name">Reward points</Label>
+						<Label htmlFor="rewardPoints">Reward points</Label>
 						<Input
 							placeholder="0"
 							type="number"
 							min={0}
 							max={10}
-							{...register('reward')}
+							id="rewardPoints"
+							{...register('rewardPoints')}
 						/>
 					</div>
 					<Label>Days</Label>
