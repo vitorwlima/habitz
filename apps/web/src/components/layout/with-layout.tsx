@@ -13,7 +13,7 @@ export const WithLayout: React.FC<{ children: React.ReactNode }> = ({
 				<div className="flex grow">
 					<DesktopSidebar />
 					<MobileSidebar />
-					<main className="grow">{children}</main>
+					<main className="grow p-4">{children}</main>
 				</div>
 			</div>
 		</Sheet>

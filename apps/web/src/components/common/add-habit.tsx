@@ -1,0 +1,100 @@
+import {
+	Dialog,
+	DialogContent,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '@/components/ui/dialog'
+import { DayValue, days } from '@/lib/days'
+import { trpc } from '@/lib/trpc'
+import { useZodForm } from '@/lib/useZedForm'
+import { z } from 'zod'
+import { Button } from '../ui/button'
+import { Checkbox } from '../ui/checkbox'
+import { Input } from '../ui/input'
+import { Label } from '../ui/label'
+
+const addHabitSchema = z.object({
+	name: z.string().min(3),
+	reward: z.coerce.number().min(0).max(10),
+	days: z
+		.array(z.enum([days[0].value, ...days.slice(1).map((day) => day.value)]))
+		.min(1)
+		.max(7),
+})
+
+export const AddHabit: React.FC = () => {
+	const createHabitMutation = trpc.createHabit.useMutation()
+	const { register, watch, setValue, handleSubmit } = useZodForm({
+		schema: addHabitSchema,
+		defaultValues: {
+			days: [],
+		},
+	})
+
+	const selectedDays = watch('days')
+
+	const handleSelectDay = (checked: string | boolean, day: DayValue) => {
+		if (checked) {
+			setValue('days', [...selectedDays, day])
+			return
+		}
+
+		setValue(
+			'days',
+			selectedDays.filter((d) => d !== day),
+		)
+	}
+
+	const onSubmit = (data: z.infer<typeof addHabitSchema>) => {
+		createHabitMutation.mutate(data, {
+			onSuccess: () => {
+				console.log('success')
+			},
+		})
+	}
+
+	return (
+		<Dialog>
+			<Button asChild>
+				<DialogTrigger>New Habit</DialogTrigger>
+			</Button>
+			<DialogContent>
+				<DialogHeader>
+					<DialogTitle>New Habit</DialogTitle>
+				</DialogHeader>
+				<form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
+					<div className="space-y-1">
+						<Label htmlFor="name">Name</Label>
+						<Input placeholder="My habit..." id="name" {...register('name')} />
+					</div>
+					<div className="space-y-1 pb-4">
+						<Label htmlFor="name">Reward points</Label>
+						<Input
+							placeholder="0"
+							type="number"
+							min={0}
+							max={10}
+							{...register('reward')}
+						/>
+					</div>
+					<Label>Days</Label>
+					{days.map((day) => (
+						<div className="flex items-center space-x-2">
+							<Checkbox
+								id={day.value}
+								onCheckedChange={(e) => handleSelectDay(e.valueOf(), day.value)}
+								checked={selectedDays.includes(day.value)}
+							/>
+							<Label htmlFor={day.value}>{day.label}</Label>
+						</div>
+					))}
+					<DialogFooter className="pt-4">
+						<Button type="submit">Create</Button>
+					</DialogFooter>
+				</form>
+			</DialogContent>
+		</Dialog>
+	)
+}
