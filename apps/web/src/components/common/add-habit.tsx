@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { DayValue, days } from '@/lib/days'
+import { DayValue, allDaysList } from '@/lib/days'
 import { trpc } from '@/lib/trpc'
 import { useZodForm } from '@/lib/useZedForm'
 import { z } from 'zod'
@@ -19,7 +19,12 @@ const addHabitSchema = z.object({
 	name: z.string().min(3),
 	rewardPoints: z.coerce.number().min(0).max(10),
 	days: z
-		.array(z.enum([days[0].value, ...days.slice(1).map((day) => day.value)]))
+		.array(
+			z.enum([
+				allDaysList[0].value,
+				...allDaysList.slice(1).map((day) => day.value),
+			]),
+		)
 		.min(1)
 		.max(7),
 })
@@ -83,7 +88,7 @@ export const AddHabit: React.FC = () => {
 						/>
 					</div>
 					<Label>Days</Label>
-					{days.map((day) => (
+					{allDaysList.map((day) => (
 						<div className="flex items-center space-x-2">
 							<Checkbox
 								id={day.value}

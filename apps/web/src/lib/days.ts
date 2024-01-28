@@ -12,7 +12,7 @@ export type Day = {
 	value: DayValue
 }
 
-export const days: Day[] = [
+export const allDaysList: Day[] = [
 	{
 		label: 'Monday',
 		value: 'mon',
