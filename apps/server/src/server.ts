@@ -1,8 +1,9 @@
 import cors from '@elysiajs/cors'
 import { trpc } from '@elysiajs/trpc'
 import { Elysia } from 'elysia'
-import { createContext } from './context'
-import { appRouter } from './router'
+import { env } from './env'
+import { createContext } from './trpc/context'
+import { appRouter } from './trpc/router'
 
 new Elysia()
 	.use(
@@ -17,6 +18,6 @@ new Elysia()
 			createContext,
 		}),
 	)
-	.listen(Number(Bun.env.PORT), (server) => {
+	.listen(env.PORT, (server) => {
 		console.log(`Listening on port ${server.port}`)
 	})

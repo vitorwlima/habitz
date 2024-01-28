@@ -25,18 +25,21 @@ const addHabitSchema = z.object({
 })
 
 export const AddHabit: React.FC = () => {
-	const createHabitMutation = trpc.createHabit.useMutation()
+	const createHabitMutation = trpc.habit.createHabit.useMutation()
 	const { register, watch, setValue, handleSubmit } = useZodForm({
 		schema: addHabitSchema,
 		defaultValues: {
 			days: [],
 		},
 		onSubmit: (data) => {
-			createHabitMutation.mutate(data, {
-				onSuccess: () => {
-					console.log('success')
+			createHabitMutation.mutate(
+				{ ...data, userId: 'default-user-id' },
+				{
+					onSuccess: () => {
+						console.log('success')
+					},
 				},
-			})
+			)
 		},
 	})
 
