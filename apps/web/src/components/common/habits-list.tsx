@@ -1,4 +1,6 @@
-import { DialogTrigger } from '../ui/dialog'
+import { DaysDisplay } from '@/components/common/days-display'
+import { HabitModal } from '@/components/common/habit-modal'
+import { DialogTrigger } from '@/components/ui/dialog'
 import {
 	Table,
 	TableBody,
@@ -7,9 +9,7 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from '../ui/table'
-import { DaysDisplay } from './days-display'
-import { HabitModal } from './habit-modal'
+} from '@/components/ui/table'
 
 type Props = {
 	habits: {

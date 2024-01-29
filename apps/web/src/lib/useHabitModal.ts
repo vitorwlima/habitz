@@ -5,6 +5,7 @@ import { useZodForm } from '@/lib/useZedForm'
 import { useQueryClient } from '@tanstack/react-query'
 import { getQueryKey } from '@trpc/react-query'
 import { useState } from 'react'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 const habitSchema = z.object({
@@ -82,6 +83,7 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 					return { habits }
 				})
 
+				toast.success('Habit successfully created.')
 				reset()
 				setOpen(false)
 				return
@@ -118,6 +120,7 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 				return { habits }
 			})
 
+			toast.success('Habit successfully updated.')
 			reset(data)
 			setOpen(false)
 		},
@@ -155,6 +158,7 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 			return { habits }
 		})
 
+		toast.success('Habit successfully deleted.')
 		setOpen(false)
 	}
 
