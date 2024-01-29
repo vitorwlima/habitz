@@ -13,13 +13,16 @@ export const createHabit = publicProcedure
 		}),
 	)
 	.mutation(async ({ input }) => {
-		const habit = await db.insert(habits).values({
-			id: crypto.randomUUID(),
-			name: input.name,
-			rewardPoints: input.rewardPoints,
-			days: input.days.join(','),
-			userId: input.userId,
-		})
+		const habit = await db
+			.insert(habits)
+			.values({
+				id: crypto.randomUUID(),
+				name: input.name,
+				rewardPoints: input.rewardPoints,
+				days: input.days.join(','),
+				userId: input.userId,
+			})
+			.returning({ id: habits.id })
 
 		return habit
 	})

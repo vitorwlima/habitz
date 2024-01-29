@@ -33,6 +33,8 @@ export type Props =
 
 export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 	const {
+		open,
+		setOpen,
 		register,
 		selectedDays,
 		handleSubmit,
@@ -41,7 +43,7 @@ export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 	} = useHabitModal({ type, habit })
 
 	return (
-		<Dialog>
+		<Dialog open={open} onOpenChange={setOpen}>
 			{type === 'create' ? (
 				<Button asChild>
 					<DialogTrigger>New Habit</DialogTrigger>
@@ -84,7 +86,11 @@ export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 					))}
 					<DialogFooter className="pt-4">
 						{type === 'update' && (
-							<Button variant="destructive" onClick={handleDeleteHabit}>
+							<Button
+								variant="destructive"
+								type="button"
+								onClick={handleDeleteHabit}
+							>
 								Delete habit
 							</Button>
 						)}
