@@ -10,66 +10,50 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { DayValue, allDaysList } from '@/lib/days'
-import { trpc } from '@/lib/trpc'
-import { useZodForm } from '@/lib/useZedForm'
-import { z } from 'zod'
+import { allDaysList } from '@/lib/days'
+import { useHabitModal } from '@/lib/useHabitModal'
 
-const addHabitSchema = z.object({
-	name: z.string().min(3),
-	rewardPoints: z.coerce.number().min(0).max(10),
-	days: z
-		.array(
-			z.enum([
-				allDaysList[0].value,
-				...allDaysList.slice(1).map((day) => day.value),
-			]),
-		)
-		.min(1)
-		.max(7),
-})
+export type Props =
+	| {
+			type: 'create'
+			habit?: undefined
+			children?: undefined
+	  }
+	| {
+			type: 'update'
+			children: React.ReactNode
+			habit: {
+				userId: string
+				id: string
+				name: string
+				rewardPoints: number
+				days: string
+			}
+	  }
 
-export const AddHabit: React.FC = () => {
-	const createHabitMutation = trpc.habit.createHabit.useMutation()
-	const { register, watch, setValue, handleSubmit } = useZodForm({
-		schema: addHabitSchema,
-		defaultValues: {
-			days: [],
-		},
-		onSubmit: (data) => {
-			createHabitMutation.mutate(
-				{ ...data, userId: 'default-user-id' },
-				{
-					onSuccess: () => {
-						console.log('success')
-					},
-				},
-			)
-		},
-	})
-
-	const selectedDays = watch('days')
-
-	const handleSelectDay = (checked: string | boolean, day: DayValue) => {
-		if (checked) {
-			setValue('days', [...selectedDays, day])
-			return
-		}
-
-		setValue(
-			'days',
-			selectedDays.filter((d) => d !== day),
-		)
-	}
+export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
+	const {
+		register,
+		selectedDays,
+		handleSubmit,
+		handleSelectDay,
+		handleDeleteHabit,
+	} = useHabitModal({ type, habit })
 
 	return (
 		<Dialog>
-			<Button asChild>
-				<DialogTrigger>New Habit</DialogTrigger>
-			</Button>
+			{type === 'create' ? (
+				<Button asChild>
+					<DialogTrigger>New Habit</DialogTrigger>
+				</Button>
+			) : (
+				children
+			)}
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>New Habit</DialogTitle>
+					<DialogTitle>
+						{type === 'create' ? 'New Habit' : 'Edit habit'}
+					</DialogTitle>
 				</DialogHeader>
 				<form className="space-y-2" onSubmit={handleSubmit}>
 					<div className="space-y-1">
@@ -99,7 +83,14 @@ export const AddHabit: React.FC = () => {
 						</div>
 					))}
 					<DialogFooter className="pt-4">
-						<Button type="submit">Create</Button>
+						{type === 'update' && (
+							<Button variant="destructive" onClick={handleDeleteHabit}>
+								Delete habit
+							</Button>
+						)}
+						<Button type="submit">
+							{type === 'create' ? 'Create' : 'Save'}
+						</Button>
 					</DialogFooter>
 				</form>
 			</DialogContent>

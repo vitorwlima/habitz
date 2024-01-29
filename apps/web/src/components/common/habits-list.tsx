@@ -1,3 +1,4 @@
+import { DialogTrigger } from '../ui/dialog'
 import {
 	Table,
 	TableBody,
@@ -8,6 +9,7 @@ import {
 	TableRow,
 } from '../ui/table'
 import { DaysDisplay } from './days-display'
+import { HabitModal } from './habit-modal'
 
 type Props = {
 	habits: {
@@ -31,13 +33,20 @@ export const HabitsList: React.FC<Props> = ({ habits }) => {
 
 			<TableBody>
 				{habits.map((habit) => (
-					<TableRow key={habit.id} className="cursor-pointer">
-						<TableCell className="w-96">{habit.name}</TableCell>
-						<TableCell className="w-60">{habit.rewardPoints}</TableCell>
-						<TableCell>
-							<DaysDisplay days={habit.days} />
-						</TableCell>
-					</TableRow>
+					<HabitModal type="update" habit={habit}>
+						<DialogTrigger asChild>
+							<TableRow
+								key={habit.id}
+								className="cursor-pointer appearance-none"
+							>
+								<TableCell className="w-96">{habit.name}</TableCell>
+								<TableCell className="w-60">{habit.rewardPoints}</TableCell>
+								<TableCell>
+									<DaysDisplay days={habit.days} />
+								</TableCell>
+							</TableRow>
+						</DialogTrigger>
+					</HabitModal>
 				))}
 			</TableBody>
 		</Table>
