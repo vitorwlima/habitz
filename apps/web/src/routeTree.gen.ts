@@ -3,15 +3,15 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as TodayImport } from './routes/today'
+import { Route as TrackerImport } from './routes/tracker'
 import { Route as RewardsImport } from './routes/rewards'
 import { Route as HistoryImport } from './routes/history'
 import { Route as HabitsImport } from './routes/habits'
 
 // Create/Update Routes
 
-const TodayRoute = TodayImport.update({
-  path: '/today',
+const TrackerRoute = TrackerImport.update({
+  path: '/tracker',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,8 +46,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RewardsImport
       parentRoute: typeof rootRoute
     }
-    '/today': {
-      preLoaderRoute: typeof TodayImport
+    '/tracker': {
+      preLoaderRoute: typeof TrackerImport
       parentRoute: typeof rootRoute
     }
   }
@@ -59,5 +59,5 @@ export const routeTree = rootRoute.addChildren([
   HabitsRoute,
   HistoryRoute,
   RewardsRoute,
-  TodayRoute,
+  TrackerRoute,
 ])

@@ -11,7 +11,7 @@ export const Route = createRootRoute({
 	loader: (ctx) => {
 		if (ctx.location.pathname === '/') {
 			router.navigate({
-				to: '/today',
+				to: '/tracker',
 				replace: true,
 			})
 		}

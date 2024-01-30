@@ -15,7 +15,7 @@ export const DesktopSidebar: React.FC<Props> = ({ className }) => {
 				className,
 			)}
 		>
-			<Link to="/today">
+			<Link to="/tracker">
 				{({ isActive }) => (
 					<Button
 						variant="ghost"
@@ -24,7 +24,7 @@ export const DesktopSidebar: React.FC<Props> = ({ className }) => {
 						})}
 					>
 						<Calendar size={18} />
-						Today
+						Tracker
 					</Button>
 				)}
 			</Link>
