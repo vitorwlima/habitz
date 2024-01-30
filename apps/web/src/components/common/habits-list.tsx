@@ -22,6 +22,14 @@ type Props = {
 }
 
 export const HabitsList: React.FC<Props> = ({ habits }) => {
+	if (!habits.length) {
+		return (
+			<p className="text-muted-foreground">
+				You have not created any habits yet. Click the button above to start.
+			</p>
+		)
+	}
+
 	return (
 		<Table>
 			<TableCaption>A list of all your created habits.</TableCaption>

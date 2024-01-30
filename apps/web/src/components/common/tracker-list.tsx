@@ -23,6 +23,14 @@ export const TrackerList: React.FC<Props> = ({ date }) => {
 		userId: 'default-user-id',
 	})
 
+	if (!habits.length) {
+		return (
+			<p className="text-muted-foreground">
+				You don't have any habits for this day.
+			</p>
+		)
+	}
+
 	return (
 		<ul className="flex flex-col gap-4">
 			{habits.map((habit) => (
