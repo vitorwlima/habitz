@@ -1,3 +1,4 @@
+import { TrackerCard } from '@/components/common/tracker-card'
 import { allDaysList } from '@/lib/days'
 import { trpc } from '@/lib/trpc'
 import { getDay } from 'date-fns'
@@ -15,9 +16,9 @@ export const TrackerList: React.FC<Props> = ({ date }) => {
 		data?.habits.filter((habit) => habit.days.includes(weekdayValue)) ?? []
 
 	return (
-		<ul>
+		<ul className="flex flex-col gap-4">
 			{habits.map((habit) => (
-				<li key={habit.id}>{habit.name}</li>
+				<TrackerCard key={habit.id} habit={habit} completed={false} />
 			))}
 		</ul>
 	)
