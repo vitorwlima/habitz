@@ -30,6 +30,7 @@ export const TrackerCard: React.FC<Props> = ({ habit, date, completion }) => {
 		date,
 		userId: 'default-user-id',
 	})
+	const isCompleted = Boolean(completion?.completed)
 
 	const handleTriggerCompletion = () => {
 		mutate(
@@ -37,7 +38,7 @@ export const TrackerCard: React.FC<Props> = ({ habit, date, completion }) => {
 				date,
 				habitId: habit.id,
 				completionId: completion?.id,
-				completed: completion?.completed ? false : true,
+				completed: isCompleted ? false : true,
 				userId: 'default-user-id',
 			},
 			{
@@ -84,7 +85,7 @@ export const TrackerCard: React.FC<Props> = ({ habit, date, completion }) => {
 					if (c.id === completion!.id) {
 						return {
 							...c,
-							completed: completion?.completed ? 0 : 1,
+							completed: isCompleted ? 0 : 1,
 						}
 					}
 
@@ -104,7 +105,7 @@ export const TrackerCard: React.FC<Props> = ({ habit, date, completion }) => {
 			]
 		})
 
-		if (completion?.completed) {
+		if (isCompleted) {
 			toast.success('Habit successfully updated.')
 		} else {
 			toast.success('Habit successfully completed.')
@@ -123,11 +124,16 @@ export const TrackerCard: React.FC<Props> = ({ habit, date, completion }) => {
 				</CardHeader>
 			</div>
 
-			<div>
-				{completion?.completed ? (
+			<div className="relative">
+				{isCompleted ? (
 					<CheckCircle className="w-6 h-6 text-green-500" />
 				) : (
 					<CircleSlash className="w-6 h-6 text-border" />
+				)}
+				{isCompleted && (
+					<p className="absolute text-xs text-muted-foreground left-1/2 -translate-x-1/2 font-extralight">
+						+{habit.rewardPoints}
+					</p>
 				)}
 			</div>
 		</Card>
