@@ -11,8 +11,8 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useHabitModal } from '@/lib/component-hooks/useHabitModal'
 import { allDaysList } from '@/lib/days'
-import { useHabitModal } from '@/lib/useHabitModal'
 
 export type Props =
 	| {
@@ -55,7 +55,7 @@ export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 			<DialogContent>
 				<DialogHeader>
 					<DialogTitle>
-						{type === 'create' ? 'New Habit' : 'Edit habit'}
+						{type === 'create' ? 'New Habit' : 'Edit Habit'}
 					</DialogTitle>
 				</DialogHeader>
 				<form className="space-y-2" onSubmit={handleSubmit}>
