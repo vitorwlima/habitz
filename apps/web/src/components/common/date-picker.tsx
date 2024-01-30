@@ -35,6 +35,7 @@ export const DatePicker: React.FC<Props> = ({ date, onChange }) => {
 					selected={date}
 					onSelect={onChange}
 					initialFocus
+					required
 				/>
 			</PopoverContent>
 		</Popover>
