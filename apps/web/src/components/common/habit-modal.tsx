@@ -1,3 +1,4 @@
+import { DeleteHabitModal } from '@/components/common/delete-habit-modal'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -86,13 +87,7 @@ export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 					))}
 					<DialogFooter className="pt-4">
 						{type === 'update' && (
-							<Button
-								variant="destructive"
-								type="button"
-								onClick={handleDeleteHabit}
-							>
-								Delete habit
-							</Button>
+							<DeleteHabitModal onDelete={handleDeleteHabit} />
 						)}
 						<Button type="submit">
 							{type === 'create' ? 'Create' : 'Save'}
