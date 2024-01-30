@@ -24,7 +24,7 @@ export const Tracker: React.FC = () => {
 				/>
 			</header>
 
-			<TrackerList />
+			<TrackerList date={new Date(date)} />
 		</div>
 	)
 }

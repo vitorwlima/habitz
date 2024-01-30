@@ -5,5 +5,12 @@
 			"semicolons": "asNeeded",
 			"quoteStyle": "single"
 		}
+	},
+	"linter": {
+		"rules": {
+			"style": {
+				"noNonNullAssertion": "off"
+			}
+		}
 	}
 }

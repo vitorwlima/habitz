@@ -15,6 +15,20 @@
       "when": 1706482079826,
       "tag": "0001_chunky_wolverine",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1706577491118,
+      "tag": "0002_superb_chamber",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1706577733674,
+      "tag": "0003_abnormal_black_bolt",
+      "breakpoints": true
     }
   ]
 }
