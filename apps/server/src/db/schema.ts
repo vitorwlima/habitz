@@ -19,6 +19,7 @@ export const habitsCompletions = sqliteTable('habits_completions', {
 	id: text('id').primaryKey(),
 	habitId: text('habit_id').notNull(),
 	date: text('date').notNull(),
+	earned_points: integer('earned_points').notNull(),
 	completed: integer('completed').notNull(),
 	userId: text('user_id').notNull(),
 })
@@ -34,3 +35,41 @@ export const habitsCompletionsRelations = relations(
 )
 
 export type HabitsCompletion = typeof habitsCompletions.$inferSelect
+
+export const rewards = sqliteTable('rewards', {
+	id: text('id').primaryKey(),
+	name: text('name').notNull(),
+	pointsToClaim: integer('points_to_claim').notNull(),
+	userId: text('user_id').notNull(),
+})
+
+export const rewardsRelations = relations(rewards, ({ many }) => ({
+	claims: many(claimedRewards),
+}))
+
+export type Reward = typeof rewards.$inferSelect
+
+export const claimedRewards = sqliteTable('claimed_rewards', {
+	id: text('id').primaryKey(),
+	rewardId: text('reward_id').notNull(),
+	date: text('date').notNull(),
+	claimed: integer('claimed').notNull(),
+	userId: text('user_id').notNull(),
+})
+
+export const claimedRewardsRelations = relations(claimedRewards, ({ one }) => ({
+	reward: one(rewards, {
+		fields: [claimedRewards.rewardId],
+		references: [rewards.id],
+	}),
+}))
+
+export type ClaimedReward = typeof claimedRewards.$inferSelect
+
+export const rewardPoints = sqliteTable('reward_points', {
+	id: text('id').primaryKey(),
+	points: integer('points').notNull(),
+	userId: text('user_id').notNull(),
+})
+
+export type RewardPoint = typeof rewardPoints.$inferSelect
