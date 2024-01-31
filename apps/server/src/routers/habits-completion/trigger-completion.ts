@@ -10,6 +10,7 @@ export const triggerCompletion = publicProcedure
 			habitId: z.string(),
 			completionId: z.string().optional(),
 			userId: z.string(),
+			earnedPoints: z.number().min(0).max(10),
 			date: z.string(),
 			completed: z.boolean(),
 		}),
@@ -32,6 +33,7 @@ export const triggerCompletion = publicProcedure
 				id: crypto.randomUUID(),
 				habitId: input.habitId,
 				userId: input.userId,
+				earned_points: input.earnedPoints,
 				date: input.date,
 				completed: Number(input.completed),
 			})
