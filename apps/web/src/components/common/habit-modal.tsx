@@ -58,12 +58,12 @@ export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 						{type === 'create' ? 'New Habit' : 'Edit Habit'}
 					</DialogTitle>
 				</DialogHeader>
-				<form className="space-y-2" onSubmit={handleSubmit}>
+				<form className="space-y-4" onSubmit={handleSubmit}>
 					<div className="space-y-1">
 						<Label htmlFor="name">Name</Label>
 						<Input placeholder="My habit..." id="name" {...register('name')} />
 					</div>
-					<div className="space-y-1 pb-4">
+					<div className="space-y-1">
 						<Label htmlFor="rewardPoints">Reward points</Label>
 						<Input
 							placeholder="0"
@@ -74,17 +74,23 @@ export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 							{...register('rewardPoints')}
 						/>
 					</div>
-					<Label>Days</Label>
-					{allDaysList.map((day) => (
-						<div className="flex items-center space-x-2">
-							<Checkbox
-								id={day.value}
-								onCheckedChange={(e) => handleSelectDay(e.valueOf(), day.value)}
-								checked={selectedDays.includes(day.value)}
-							/>
-							<Label htmlFor={day.value}>{day.label}</Label>
+					<div className="space-y-3">
+						<Label>Days</Label>
+						<div className="space-y-3">
+							{allDaysList.map((day) => (
+								<div className="flex items-center space-x-2">
+									<Checkbox
+										id={day.value}
+										onCheckedChange={(e) =>
+											handleSelectDay(e.valueOf(), day.value)
+										}
+										checked={selectedDays.includes(day.value)}
+									/>
+									<Label htmlFor={day.value}>{day.label}</Label>
+								</div>
+							))}
 						</div>
-					))}
+					</div>
 					<DialogFooter className="pt-4">
 						{type === 'update' && (
 							<DeleteHabitModal onDelete={handleDeleteHabit} />
