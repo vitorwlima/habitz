@@ -2,6 +2,7 @@ import { Props } from '@/components/common/habit-modal'
 import { DayValue, allDaysList } from '@/lib/days'
 import { trpc } from '@/lib/trpc'
 import { useZodForm } from '@/lib/useZedForm'
+import { useUser } from '@clerk/clerk-react'
 import { useQueryClient } from '@tanstack/react-query'
 import { getQueryKey } from '@trpc/react-query'
 import { useState } from 'react'
@@ -22,6 +23,7 @@ const habitSchema = z.object({
 })
 
 export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
+	const { user } = useUser()
 	const [open, setOpen] = useState(false)
 	const queryClient = useQueryClient()
 	const createHabitMutation = trpc.habit.createHabit.useMutation()
@@ -40,7 +42,7 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 				createHabitMutation.mutate(
 					{
 						...data,
-						userId: 'default-user-id',
+						userId: user!.id,
 					},
 					{
 						onSuccess: ([successData]) => {
@@ -72,7 +74,7 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 						{
 							name: data.name,
 							days: data.days.join(','),
-							userId: 'default-user-id',
+							userId: user!.id,
 						},
 					]
 
@@ -88,7 +90,7 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 			updateHabitMutation.mutate({
 				...data,
 				id: habit?.id as string,
-				userId: 'default-user-id',
+				userId: user!.id,
 			})
 
 			queryClient.setQueriesData(habitsKey, (old) => {

@@ -1,11 +1,5 @@
 import { getDate, getMonth, getYear } from 'date-fns'
 
-export const getFormattedDate = (date: Date | undefined): string => {
-	if (!date) {
-		return `${getYear(new Date())}-${getMonth(new Date()) + 1}-${getDate(
-			new Date(),
-		)}`
-	}
-
+export const getFormattedDate = (date: Date): string => {
 	return `${getYear(date)}-${getMonth(date) + 1}-${getDate(date)}`
 }

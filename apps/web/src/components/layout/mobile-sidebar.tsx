@@ -4,7 +4,7 @@ import { SheetContent } from '@/components/ui/sheet'
 export const MobileSidebar: React.FC = () => {
 	return (
 		<SheetContent>
-			<DesktopSidebar className="block border-none" />
+			<DesktopSidebar className="flex border-none" />
 		</SheetContent>
 	)
 }

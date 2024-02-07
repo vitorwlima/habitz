@@ -12,6 +12,8 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as TrackerImport } from './routes/tracker'
+import { Route as SignUpImport } from './routes/sign-up'
+import { Route as SignInImport } from './routes/sign-in'
 import { Route as HistoryImport } from './routes/history'
 import { Route as HabitsImport } from './routes/habits'
 
@@ -19,6 +21,16 @@ import { Route as HabitsImport } from './routes/habits'
 
 const TrackerRoute = TrackerImport.update({
   path: '/tracker',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SignUpRoute = SignUpImport.update({
+  path: '/sign-up',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SignInRoute = SignInImport.update({
+  path: '/sign-in',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -44,6 +56,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HistoryImport
       parentRoute: typeof rootRoute
     }
+    '/sign-in': {
+      preLoaderRoute: typeof SignInImport
+      parentRoute: typeof rootRoute
+    }
+    '/sign-up': {
+      preLoaderRoute: typeof SignUpImport
+      parentRoute: typeof rootRoute
+    }
     '/tracker': {
       preLoaderRoute: typeof TrackerImport
       parentRoute: typeof rootRoute
@@ -56,6 +76,8 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   HabitsRoute,
   HistoryRoute,
+  SignInRoute,
+  SignUpRoute,
   TrackerRoute,
 ])
 

@@ -17,7 +17,7 @@ export const Tracker: React.FC = () => {
 					onChange={(date) =>
 						navigate({
 							search: () => ({
-								date: getFormattedDate(date),
+								date: getFormattedDate(date ?? new Date()),
 							}),
 						})
 					}

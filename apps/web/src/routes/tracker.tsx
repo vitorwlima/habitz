@@ -1,3 +1,4 @@
+import { WithLayout } from '@/components/layout/with-layout'
 import { getFormattedDate } from '@/lib/get-formatted-date'
 import { Tracker } from '@/pages/tracker'
 import { createFileRoute } from '@tanstack/react-router'
@@ -8,6 +9,10 @@ const trackerSearchSchema = z.object({
 })
 
 export const Route = createFileRoute('/tracker')({
-	component: () => <Tracker />,
+	component: () => (
+		<WithLayout>
+			<Tracker />
+		</WithLayout>
+	),
 	validateSearch: (search) => trackerSearchSchema.parse(search),
 })

@@ -1,10 +1,12 @@
 import { HabitModal } from '@/components/common/habit-modal'
 import { HabitsList } from '@/components/common/habits-list'
 import { trpc } from '@/lib/trpc'
+import { useUser } from '@clerk/clerk-react'
 
 export const Habits: React.FC = () => {
+	const { user } = useUser()
 	const { data } = trpc.habit.getHabits.useQuery({
-		userId: 'default-user-id',
+		userId: user!.id,
 	})
 	const habits = data?.habits ?? []
 

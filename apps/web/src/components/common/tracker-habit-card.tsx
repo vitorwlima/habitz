@@ -1,5 +1,6 @@
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { trpc } from '@/lib/trpc'
+import { useUser } from '@clerk/clerk-react'
 import { useQueryClient } from '@tanstack/react-query'
 import { getQueryKey } from '@trpc/react-query'
 import { CheckCircle, CircleSlash } from 'lucide-react'
@@ -27,11 +28,12 @@ export const TrackerHabitCard: React.FC<Props> = ({
 	date,
 	completion,
 }) => {
+	const { user } = useUser()
 	const { mutate } = trpc.completion.triggerCompletion.useMutation()
 	const queryClient = useQueryClient()
 	const completionsQueryKey = getQueryKey(trpc.completion.getCompletions, {
 		date,
-		userId: 'default-user-id',
+		userId: user!.id,
 	})
 	const isCompleted = Boolean(completion?.completed)
 
@@ -42,7 +44,7 @@ export const TrackerHabitCard: React.FC<Props> = ({
 				habitId: habit.id,
 				completionId: completion?.id,
 				completed: isCompleted ? false : true,
-				userId: 'default-user-id',
+				userId: user!.id,
 			},
 			{
 				onSuccess: ([successData]) => {
@@ -101,7 +103,7 @@ export const TrackerHabitCard: React.FC<Props> = ({
 				{
 					date,
 					id: undefined,
-					userId: 'default-user-id',
+					userId: user!.id,
 					habitId: habit.id,
 					completed: true,
 				},

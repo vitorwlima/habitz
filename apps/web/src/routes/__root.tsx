@@ -1,18 +1,17 @@
-import { WithLayout } from '@/components/layout/with-layout'
+import { getFormattedDate } from '@/lib/get-formatted-date'
 import { router } from '@/main'
 import { Outlet, createRootRoute } from '@tanstack/react-router'
 
 export const Route = createRootRoute({
-	component: () => (
-		<WithLayout>
-			<Outlet />
-		</WithLayout>
-	),
+	component: () => <Outlet />,
 	loader: (ctx) => {
 		if (ctx.location.pathname === '/') {
 			router.navigate({
 				to: '/tracker',
 				replace: true,
+				search: {
+					date: getFormattedDate(new Date()),
+				},
 			})
 		}
 	},
