@@ -69,7 +69,6 @@ export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 							placeholder="0"
 							type="number"
 							min={0}
-							max={10}
 							id="rewardPoints"
 							{...register('rewardPoints')}
 						/>

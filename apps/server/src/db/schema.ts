@@ -19,7 +19,7 @@ export const habitsCompletions = sqliteTable('habits_completions', {
 	id: text('id').primaryKey(),
 	habitId: text('habit_id').notNull(),
 	date: text('date').notNull(),
-	earned_points: integer('earned_points').notNull(),
+	earnedPoints: integer('earned_points').notNull(),
 	completed: integer('completed').notNull(),
 	userId: text('user_id').notNull(),
 })

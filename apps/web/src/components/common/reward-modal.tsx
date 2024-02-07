@@ -61,7 +61,6 @@ export const RewardModal: React.FC<Props> = ({ type, reward, children }) => {
 							placeholder="0"
 							type="number"
 							min={0}
-							max={10}
 							id="pointsToClaim"
 							{...register('pointsToClaim')}
 						/>

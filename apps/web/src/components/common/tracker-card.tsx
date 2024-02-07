@@ -20,6 +20,7 @@ type Props = {
 		id: string
 		habitId: string
 		completed: number
+		earnedPoints: number
 	}
 }
 
@@ -40,6 +41,8 @@ export const TrackerCard: React.FC<Props> = ({ habit, date, completion }) => {
 				completionId: completion?.id,
 				completed: isCompleted ? false : true,
 				userId: 'default-user-id',
+				earnedPoints: completion?.earnedPoints ?? 0,
+				rewardPoints: habit.rewardPoints,
 			},
 			{
 				onSuccess: ([successData]) => {
@@ -101,6 +104,7 @@ export const TrackerCard: React.FC<Props> = ({ habit, date, completion }) => {
 					userId: 'default-user-id',
 					habitId: habit.id,
 					completed: true,
+					earnedPoints: habit.rewardPoints,
 				},
 			]
 		})
@@ -132,7 +136,7 @@ export const TrackerCard: React.FC<Props> = ({ habit, date, completion }) => {
 				)}
 				{isCompleted && (
 					<p className="absolute text-xs text-muted-foreground left-1/2 -translate-x-1/2 font-extralight">
-						+{habit.rewardPoints}
+						+{completion!.earnedPoints}
 					</p>
 				)}
 			</div>

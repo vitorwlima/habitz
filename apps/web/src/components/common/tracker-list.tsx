@@ -32,17 +32,21 @@ export const TrackerList: React.FC<Props> = ({ date }) => {
 	}
 
 	return (
-		<ul className="flex flex-col gap-4">
-			{habits.map((habit) => (
-				<TrackerCard
-					key={habit.id}
-					habit={habit}
-					date={date}
-					completion={completions?.find(
-						(c) => c.habitId === habit.id && c.date === date,
-					)}
-				/>
-			))}
-		</ul>
+		<section>
+			<h3 className="text-lg mb-2">To do</h3>
+
+			<ul className="flex flex-col gap-4">
+				{habits.map((habit) => (
+					<TrackerCard
+						key={habit.id}
+						habit={habit}
+						date={date}
+						completion={completions?.find(
+							(c) => c.habitId === habit.id && c.date === date,
+						)}
+					/>
+				))}
+			</ul>
+		</section>
 	)
 }
