@@ -1,4 +1,4 @@
-import { DeleteHabitModal } from '@/components/common/delete-habit-modal'
+import { ConfirmDeleteModal } from '@/components/common/confirm-delete-modal'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -93,7 +93,7 @@ export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 					</div>
 					<DialogFooter className="pt-4">
 						{type === 'update' && (
-							<DeleteHabitModal onDelete={handleDeleteHabit} />
+							<ConfirmDeleteModal title="habit" onDelete={handleDeleteHabit} />
 						)}
 						<Button type="submit">
 							{type === 'create' ? 'Create' : 'Save'}

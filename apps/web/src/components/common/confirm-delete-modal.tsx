@@ -11,22 +11,27 @@ import {
 
 type Props = {
 	onDelete: () => void
+	title: string
 }
 
-export const DeleteHabitModal: React.FC<Props> = ({ onDelete }) => {
+export const ConfirmDeleteModal: React.FC<Props> = ({ onDelete, title }) => {
 	return (
 		<Dialog>
 			<Button variant="destructive" asChild>
-				<DialogTrigger>Delete Habit</DialogTrigger>
+				<DialogTrigger>
+					Delete <span className="contents capitalize">{title}</span>
+				</DialogTrigger>
 			</Button>
 
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Delete Habit</DialogTitle>
+					<DialogTitle>
+						Delete <span className="capitalize">{title}</span>
+					</DialogTitle>
 				</DialogHeader>
 
 				<p className="text-muted-foreground">
-					Are you sure you want to delete this habit? All of its completions
+					Are you sure you want to delete this {title}? All of its completions
 					will be lost.
 				</p>
 

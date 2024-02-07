@@ -19,5 +19,5 @@ new Elysia()
 		}),
 	)
 	.listen(env.PORT, (server) => {
-		console.log(`Listening on port ${server.port}`)
+		console.info(`Listening on port ${server.port}`)
 	})

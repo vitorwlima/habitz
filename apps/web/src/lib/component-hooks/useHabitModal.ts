@@ -159,6 +159,7 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 		})
 
 		toast.success('Habit successfully deleted.')
+		reset()
 		setOpen(false)
 	}
 

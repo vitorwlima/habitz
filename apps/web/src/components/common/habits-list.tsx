@@ -41,12 +41,9 @@ export const HabitsList: React.FC<Props> = ({ habits }) => {
 
 			<TableBody>
 				{habits.map((habit) => (
-					<HabitModal type="update" habit={habit}>
+					<HabitModal type="update" habit={habit} key={habit.id}>
 						<DialogTrigger asChild>
-							<TableRow
-								key={habit.id}
-								className="cursor-pointer appearance-none"
-							>
+							<TableRow className="cursor-pointer appearance-none">
 								<TableCell className="w-96">{habit.name}</TableCell>
 								<TableCell className="w-60">{habit.rewardPoints}</TableCell>
 								<TableCell>
