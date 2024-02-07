@@ -10,7 +10,7 @@ import { z } from 'zod'
 
 const habitSchema = z.object({
 	name: z.string().min(3),
-	rewardPoints: z.coerce.number().min(0).max(10),
+	rewardPoints: z.coerce.number().min(0),
 	days: z
 		.array(
 			z.enum([

@@ -10,7 +10,7 @@ export const triggerCompletion = publicProcedure
 			habitId: z.string(),
 			completionId: z.string().optional(),
 			userId: z.string(),
-			earnedPoints: z.number().min(0).max(10),
+			earnedPoints: z.number().min(0),
 			date: z.string(),
 			completed: z.boolean(),
 		}),
