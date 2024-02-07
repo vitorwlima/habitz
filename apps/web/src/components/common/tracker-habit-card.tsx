@@ -1,5 +1,6 @@
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { trpc } from '@/lib/trpc'
+import { cn } from '@/lib/utils'
 import { useUser } from '@clerk/clerk-react'
 import { useQueryClient } from '@tanstack/react-query'
 import { getQueryKey } from '@trpc/react-query'
@@ -120,7 +121,12 @@ export const TrackerHabitCard: React.FC<Props> = ({
 	return (
 		<Card
 			key={habit.id}
-			className="flex items-center justify-between p-6 cursor-pointer"
+			className={cn(
+				'flex items-center justify-between p-6 cursor-pointer transition-colors hover:border-green-500',
+				{
+					'border-green-500': isCompleted,
+				},
+			)}
 			onClick={handleTriggerCompletion}
 		>
 			<div>
