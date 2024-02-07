@@ -41,19 +41,6 @@ export const DesktopSidebar: React.FC<Props> = ({ className }) => {
 					</Button>
 				)}
 			</Link>
-			<Link to="/rewards">
-				{({ isActive }) => (
-					<Button
-						variant="ghost"
-						className={cn('w-full gap-2 justify-start', {
-							'bg-accent': isActive,
-						})}
-					>
-						<Gift size={18} />
-						Rewards
-					</Button>
-				)}
-			</Link>
 			<Link to="/history">
 				{({ isActive }) => (
 					<Button

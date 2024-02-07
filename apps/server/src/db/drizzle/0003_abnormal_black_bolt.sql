@@ -1,1 +1,0 @@
-ALTER TABLE habits_completions ADD `user_id` text NOT NULL;

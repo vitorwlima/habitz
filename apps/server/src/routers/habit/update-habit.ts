@@ -9,7 +9,6 @@ export const updateHabit = publicProcedure
 		z.object({
 			id: z.string(),
 			name: z.string().min(3),
-			rewardPoints: z.coerce.number().min(0),
 			days: z.array(z.string()).min(1).max(7),
 			userId: z.string(),
 		}),
@@ -19,7 +18,6 @@ export const updateHabit = publicProcedure
 			.update(habits)
 			.set({
 				name: input.name,
-				rewardPoints: input.rewardPoints,
 				days: input.days.join(','),
 			})
 			.where(eq(habits.id, input.id))

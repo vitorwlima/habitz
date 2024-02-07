@@ -10,7 +10,6 @@ import { z } from 'zod'
 
 const habitSchema = z.object({
 	name: z.string().min(3),
-	rewardPoints: z.coerce.number().min(0),
 	days: z
 		.array(
 			z.enum([
@@ -34,7 +33,6 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 		schema: habitSchema,
 		defaultValues: {
 			name: habit?.name ?? undefined,
-			rewardPoints: habit?.rewardPoints ?? undefined,
 			days: (habit?.days?.split(',') as DayValue[]) ?? [],
 		},
 		onSubmit: (data) => {
@@ -50,7 +48,6 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 								const oldHabits = (old as { habits: [] })?.habits as {
 									id: string
 									name: string
-									rewardPoints: number
 									days: string
 									userId: string
 								}[]
@@ -74,7 +71,6 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 						...((old as { habits: [] })?.habits as []),
 						{
 							name: data.name,
-							rewardPoints: data.rewardPoints,
 							days: data.days.join(','),
 							userId: 'default-user-id',
 						},
@@ -99,7 +95,6 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 				const oldHabits = (old as { habits: [] })?.habits as {
 					id: string
 					name: string
-					rewardPoints: number
 					days: string
 					userId: string
 				}[]
@@ -112,7 +107,6 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 					return {
 						...habit,
 						name: data.name,
-						rewardPoints: data.rewardPoints,
 						days: data.days.join(','),
 					}
 				})
@@ -148,7 +142,6 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 			const oldHabits = (old as { habits: [] })?.habits as {
 				id: string
 				name: string
-				rewardPoints: number
 				days: string
 				userId: string
 			}[]

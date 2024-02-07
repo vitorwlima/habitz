@@ -1,5 +1,5 @@
 import { DatePicker } from '@/components/common/date-picker'
-import { TrackerList } from '@/components/common/tracker-list'
+import { TrackerHabitList } from '@/components/common/tracker-habit-list'
 import { getFormattedDate } from '@/lib/get-formatted-date'
 import { Route } from '@/routes/tracker'
 import { useNavigate } from '@tanstack/react-router'
@@ -24,7 +24,7 @@ export const Tracker: React.FC = () => {
 				/>
 			</header>
 
-			<TrackerList date={date} />
+			<TrackerHabitList date={date} />
 		</div>
 	)
 }

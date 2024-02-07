@@ -27,7 +27,6 @@ export type Props =
 				userId: string
 				id: string
 				name: string
-				rewardPoints: number
 				days: string
 			}
 	  }
@@ -62,16 +61,6 @@ export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 					<div className="space-y-1">
 						<Label htmlFor="name">Name</Label>
 						<Input placeholder="My habit..." id="name" {...register('name')} />
-					</div>
-					<div className="space-y-1">
-						<Label htmlFor="rewardPoints">Reward points</Label>
-						<Input
-							placeholder="0"
-							type="number"
-							min={0}
-							id="rewardPoints"
-							{...register('rewardPoints')}
-						/>
 					</div>
 					<div className="space-y-3">
 						<Label>Days</Label>

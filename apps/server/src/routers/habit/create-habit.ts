@@ -7,7 +7,6 @@ export const createHabit = publicProcedure
 	.input(
 		z.object({
 			name: z.string().min(3),
-			rewardPoints: z.coerce.number().min(0),
 			days: z.array(z.string()).min(1).max(7),
 			userId: z.string(),
 		}),
@@ -18,7 +17,6 @@ export const createHabit = publicProcedure
 			.values({
 				id: crypto.randomUUID(),
 				name: input.name,
-				rewardPoints: input.rewardPoints,
 				days: input.days.join(','),
 				userId: input.userId,
 			})

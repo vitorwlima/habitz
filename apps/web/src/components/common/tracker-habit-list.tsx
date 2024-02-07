@@ -1,4 +1,4 @@
-import { TrackerCard } from '@/components/common/tracker-card'
+import { TrackerHabitCard } from '@/components/common/tracker-habit-card'
 import { allDaysList } from '@/lib/days'
 import { trpc } from '@/lib/trpc'
 import { getDay } from 'date-fns'
@@ -7,7 +7,7 @@ type Props = {
 	date: string
 }
 
-export const TrackerList: React.FC<Props> = ({ date }) => {
+export const TrackerHabitList: React.FC<Props> = ({ date }) => {
 	const { data: habitsData } = trpc.habit.getHabits.useQuery({
 		userId: 'default-user-id',
 	})
@@ -25,19 +25,19 @@ export const TrackerList: React.FC<Props> = ({ date }) => {
 
 	if (!habits.length) {
 		return (
-			<p className="text-muted-foreground">
-				You don't have any habits for this day.
-			</p>
+			<section>
+				<p className="text-muted-foreground">
+					You don't have any habits for this day.
+				</p>
+			</section>
 		)
 	}
 
 	return (
 		<section>
-			<h3 className="text-lg mb-2">To do</h3>
-
 			<ul className="flex flex-col gap-4">
 				{habits.map((habit) => (
-					<TrackerCard
+					<TrackerHabitCard
 						key={habit.id}
 						habit={habit}
 						date={date}
