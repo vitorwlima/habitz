@@ -1,5 +1,6 @@
 import { TrackerHabitCard } from '@/components/common/tracker-habit-card'
 import { allDaysList } from '@/lib/days'
+import { getDateObject } from '@/lib/get-date-object'
 import { trpc } from '@/lib/trpc'
 import { useUser } from '@clerk/clerk-react'
 import { getDay } from 'date-fns'
@@ -14,7 +15,7 @@ export const TrackerHabitList: React.FC<Props> = ({ date }) => {
 		userId: user!.id,
 	})
 	const weekdayValue = allDaysList.find(
-		(day) => day.fnsValue === getDay(date),
+		(day) => day.fnsValue === getDay(getDateObject(date)),
 	)!.value
 	const habits =
 		habitsData?.habits.filter((habit) => habit.days.includes(weekdayValue)) ??

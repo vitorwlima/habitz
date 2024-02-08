@@ -1,4 +1,5 @@
 import { Props } from '@/components/common/tracker-habit-card'
+import { getDateObject } from '@/lib/get-date-object'
 import { trpc } from '@/lib/trpc'
 import { useUser } from '@clerk/clerk-react'
 import { useQueryClient } from '@tanstack/react-query'
@@ -16,7 +17,7 @@ export const useTrackerHabitCard = ({ habit, date, completion }: Props) => {
 	})
 	const isCompleted = Boolean(completion?.completed)
 
-	const isTriggerCompletionDisabled = isFuture(date)
+	const isTriggerCompletionDisabled = isFuture(getDateObject(date))
 
 	const handleTriggerCompletion = () => {
 		if (isTriggerCompletionDisabled) {
