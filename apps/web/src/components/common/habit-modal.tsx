@@ -1,4 +1,3 @@
-import { ConfirmDeleteModal } from '@/components/common/confirm-delete-modal'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -13,16 +12,15 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useHabitModal } from '@/lib/component-hooks/useHabitModal'
 import { allDaysList } from '@/lib/days'
+import { Pencil } from 'lucide-react'
 
 export type Props =
 	| {
 			type: 'create'
 			habit?: undefined
-			children?: undefined
 	  }
 	| {
 			type: 'update'
-			children: React.ReactNode
 			habit: {
 				userId: string
 				id: string
@@ -31,7 +29,7 @@ export type Props =
 			}
 	  }
 
-export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
+export const HabitModal: React.FC<Props> = ({ type, habit }) => {
 	const {
 		open,
 		setOpen,
@@ -39,7 +37,6 @@ export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 		selectedDays,
 		handleSubmit,
 		handleSelectDay,
-		handleDeleteHabit,
 	} = useHabitModal({ type, habit })
 
 	return (
@@ -49,7 +46,11 @@ export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 					<DialogTrigger>New Habit</DialogTrigger>
 				</Button>
 			) : (
-				children
+				<Button variant="ghost" className="px-3 py-1" asChild>
+					<DialogTrigger>
+						<Pencil size={16} />
+					</DialogTrigger>
+				</Button>
 			)}
 			<DialogContent>
 				<DialogHeader>
@@ -80,9 +81,6 @@ export const HabitModal: React.FC<Props> = ({ type, habit, children }) => {
 						</div>
 					</div>
 					<DialogFooter className="pt-4">
-						{type === 'update' && (
-							<ConfirmDeleteModal title="habit" onDelete={handleDeleteHabit} />
-						)}
 						<Button type="submit">
 							{type === 'create' ? 'Create' : 'Save'}
 						</Button>

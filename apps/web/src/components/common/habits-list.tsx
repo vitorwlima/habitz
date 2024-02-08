@@ -1,6 +1,6 @@
 import { DaysDisplay } from '@/components/common/days-display'
+import { DeleteHabit } from '@/components/common/delete-habit'
 import { HabitModal } from '@/components/common/habit-modal'
-import { DialogTrigger } from '@/components/ui/dialog'
 import {
 	Table,
 	TableBody,
@@ -34,21 +34,22 @@ export const HabitsList: React.FC<Props> = ({ habits }) => {
 			<TableCaption>A list of all your created habits.</TableCaption>
 			<TableHeader>
 				<TableHead className="w-96">Name</TableHead>
-				<TableHead>Days</TableHead>
+				<TableHead className="w-96">Days</TableHead>
+				<TableHead className="w-48">Actions</TableHead>
 			</TableHeader>
 
 			<TableBody>
 				{habits.map((habit) => (
-					<HabitModal type="update" habit={habit} key={habit.id}>
-						<DialogTrigger asChild>
-							<TableRow className="cursor-pointer appearance-none">
-								<TableCell className="w-96">{habit.name}</TableCell>
-								<TableCell>
-									<DaysDisplay days={habit.days} />
-								</TableCell>
-							</TableRow>
-						</DialogTrigger>
-					</HabitModal>
+					<TableRow>
+						<TableCell className="w-96">{habit.name}</TableCell>
+						<TableCell className="w-96">
+							<DaysDisplay days={habit.days} />
+						</TableCell>
+						<TableCell className="w-48 flex items-center gap-2">
+							<HabitModal type="update" key={habit.id} habit={habit} />
+							<DeleteHabit key={habit.id} habit={habit} />
+						</TableCell>
+					</TableRow>
 				))}
 			</TableBody>
 		</Table>

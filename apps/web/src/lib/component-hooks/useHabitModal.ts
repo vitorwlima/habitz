@@ -28,7 +28,6 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 	const queryClient = useQueryClient()
 	const createHabitMutation = trpc.habit.createHabit.useMutation()
 	const updateHabitMutation = trpc.habit.updateHabit.useMutation()
-	const deleteHabitMutation = trpc.habit.deleteHabit.useMutation()
 	const habitsKey = getQueryKey(trpc.habit.getHabits)
 
 	const { register, watch, setValue, handleSubmit, reset } = useZodForm({
@@ -135,29 +134,6 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 		)
 	}
 
-	const handleDeleteHabit = () => {
-		deleteHabitMutation.mutate({
-			id: habit?.id as string,
-		})
-
-		queryClient.setQueriesData(habitsKey, (old) => {
-			const oldHabits = (old as { habits: [] })?.habits as {
-				id: string
-				name: string
-				days: string
-				userId: string
-			}[]
-
-			const habits = oldHabits.filter((oldHabit) => oldHabit.id !== habit?.id)
-
-			return { habits }
-		})
-
-		toast.success('Habit successfully deleted.')
-		reset()
-		setOpen(false)
-	}
-
 	return {
 		open,
 		setOpen,
@@ -165,6 +141,5 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 		selectedDays,
 		handleSubmit,
 		handleSelectDay,
-		handleDeleteHabit,
 	}
 }
