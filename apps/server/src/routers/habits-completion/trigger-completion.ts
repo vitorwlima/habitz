@@ -1,3 +1,4 @@
+import { isFuture } from 'date-fns'
 import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 import { publicProcedure } from '../..'
@@ -15,6 +16,10 @@ export const triggerCompletion = publicProcedure
 		}),
 	)
 	.mutation(async ({ input }) => {
+		if (isFuture(input.date)) {
+			throw new Error('Cannot complete a future habit.')
+		}
+
 		if (input.completionId) {
 			const completion = await db
 				.update(habitsCompletions)

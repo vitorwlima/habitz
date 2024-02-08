@@ -1,3 +1,4 @@
+import { getDateObject } from '@/lib/get-date-object'
 import { getFormattedDate } from '@/lib/get-formatted-date'
 import { router } from '@/main'
 import { Outlet, createRootRoute } from '@tanstack/react-router'
@@ -10,7 +11,7 @@ export const Route = createRootRoute({
 				to: '/tracker',
 				replace: true,
 				search: {
-					date: getFormattedDate(new Date()),
+					date: getFormattedDate(getDateObject()),
 				},
 			})
 		}

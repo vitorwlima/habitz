@@ -1,5 +1,6 @@
 import { DatePicker } from '@/components/common/date-picker'
 import { TrackerHabitList } from '@/components/common/tracker-habit-list'
+import { getDateObject } from '@/lib/get-date-object'
 import { getFormattedDate } from '@/lib/get-formatted-date'
 import { Route } from '@/routes/tracker'
 import { useNavigate } from '@tanstack/react-router'
@@ -13,11 +14,11 @@ export const Tracker: React.FC = () => {
 			<header className="flex items-center justify-between mb-8">
 				<h2 className="text-xl font-semibold">Tracker</h2>
 				<DatePicker
-					date={new Date(date)}
+					date={getDateObject(date)}
 					onChange={(date) =>
 						navigate({
 							search: () => ({
-								date: getFormattedDate(date ?? new Date()),
+								date: getFormattedDate(date ?? getDateObject()),
 							}),
 						})
 					}

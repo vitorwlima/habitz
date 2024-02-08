@@ -1,11 +1,12 @@
+import { useTheme } from '@/components/theme/theme-provider'
 import { Button } from '@/components/ui/button'
+import { getDateObject } from '@/lib/get-date-object'
 import { getFormattedDate } from '@/lib/get-formatted-date'
 import { cn } from '@/lib/utils'
 import { UserButton, useUser } from '@clerk/clerk-react'
 import { dark } from '@clerk/themes'
 import { Link } from '@tanstack/react-router'
 import { Calendar, CircleDashed, LineChart } from 'lucide-react'
-import { useTheme } from '../theme/theme-provider'
 
 type Props = {
 	className?: string
@@ -26,7 +27,7 @@ export const DesktopSidebar: React.FC<Props> = ({ className }) => {
 				<Link
 					to="/tracker"
 					search={{
-						date: getFormattedDate(new Date()),
+						date: getFormattedDate(getDateObject()),
 					}}
 				>
 					{({ isActive }) => (
