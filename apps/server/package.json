@@ -1,30 +1,30 @@
 {
-  "name": "@apps/habitz-server",
-  "module": "index.ts",
-  "type": "module",
-  "scripts": {
-    "dev": "bun --watch src/server.ts",
-    "db:migrate-create": "drizzle-kit generate:sqlite --config src/db/drizzle.config.ts",
-    "db:migrate": "bun src/db/migrate.ts"
-  },
-  "exports": {
-    ".": "./src/index.ts"
-  },
-  "devDependencies": {
-    "bun-types": "latest",
-    "dotenv": "^16.4.1",
-    "drizzle-kit": "^0.20.13"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "@elysiajs/cors": "^0.8.0",
-    "@elysiajs/trpc": "^0.8.0",
-    "@trpc/server": "^10.45.0",
-    "date-fns": "^3.3.1",
-    "drizzle-orm": "^0.29.3",
-    "elysia": "^0.8.10",
-    "zod": "^3.22.4"
-  }
+	"name": "@apps/habitz-server",
+	"module": "index.ts",
+	"type": "module",
+	"scripts": {
+		"dev": "bun --watch src/server.ts",
+		"db:migrate-create": "drizzle-kit generate:sqlite --config src/db/drizzle.config.ts",
+		"db:migrate": "bun src/db/migrate.ts"
+	},
+	"exports": {
+		".": "./src/index.ts"
+	},
+	"devDependencies": {
+		"bun-types": "latest",
+		"dotenv": "^16.4.1",
+		"drizzle-kit": "^0.20.14"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"dependencies": {
+		"@elysiajs/cors": "^0.8.0",
+		"@elysiajs/trpc": "^0.8.0",
+		"@trpc/server": "^10.45.0",
+		"date-fns": "^3.3.1",
+		"drizzle-orm": "^0.29.3",
+		"elysia": "^0.8.10",
+		"zod": "^3.22.4"
+	}
 }

@@ -26,6 +26,9 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 	const { user } = useUser()
 	const [open, setOpen] = useState(false)
 	const queryClient = useQueryClient()
+	const allHabitsQuery = trpc.habit.getHabits.useQuery({
+		userId: user!.id,
+	})
 	const createHabitMutation = trpc.habit.createHabit.useMutation()
 	const updateHabitMutation = trpc.habit.updateHabit.useMutation()
 	const habitsKey = getQueryKey(trpc.habit.getHabits)
@@ -38,9 +41,12 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 		},
 		onSubmit: (data) => {
 			if (type === 'create') {
+				const newHabitOrder = allHabitsQuery.data?.habits.length ?? 0
+
 				createHabitMutation.mutate(
 					{
 						...data,
+						order: newHabitOrder,
 						userId: user!.id,
 					},
 					{

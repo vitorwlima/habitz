@@ -8,6 +8,7 @@ export const createHabit = publicProcedure
 		z.object({
 			name: z.string().min(3),
 			days: z.array(z.string()).min(1).max(7),
+			order: z.number().min(0),
 			userId: z.string(),
 		}),
 	)
@@ -18,6 +19,7 @@ export const createHabit = publicProcedure
 				id: crypto.randomUUID(),
 				name: input.name,
 				days: input.days.join(','),
+				order: input.order,
 				userId: input.userId,
 			})
 			.returning({ id: habits.id })

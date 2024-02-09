@@ -8,6 +8,13 @@
       "when": 1707329813828,
       "tag": "0000_broken_baron_strucker",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1707502459700,
+      "tag": "0001_bumpy_gargoyle",
+      "breakpoints": true
     }
   ]
 }

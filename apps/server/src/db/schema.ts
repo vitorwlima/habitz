@@ -6,6 +6,7 @@ export const habits = sqliteTable('habits', {
 	name: text('name').notNull(),
 	days: text('days').notNull(),
 	userId: text('user_id').notNull(),
+	order: integer('order').notNull(),
 })
 
 export const habitsRelations = relations(habits, ({ many }) => ({

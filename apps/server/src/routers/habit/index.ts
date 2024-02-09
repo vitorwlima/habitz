@@ -1,4 +1,5 @@
 import { router } from '../..'
+import { changeHabitsOrder } from './change-habits-order'
 import { createHabit } from './create-habit'
 import { deleteHabit } from './delete-habit'
 import { getHabits } from './get-habits'
@@ -9,4 +10,5 @@ export const habitRouter = router({
 	createHabit,
 	updateHabit,
 	deleteHabit,
+	changeHabitsOrder,
 })
