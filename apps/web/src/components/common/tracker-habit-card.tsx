@@ -5,7 +5,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { useTrackerHabitCard } from '@/lib/component-hooks/useTrackerHabitCard'
+import { useTrackerHabitCard } from '@/lib/component-hooks/use-tracker-habit-card'
 import { cn } from '@/lib/utils'
 import { CheckCircle, CircleSlash } from 'lucide-react'
 

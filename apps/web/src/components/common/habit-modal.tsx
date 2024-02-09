@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useHabitModal } from '@/lib/component-hooks/useHabitModal'
+import { useHabitModal } from '@/lib/component-hooks/use-habit-modal'
 import { allDaysList } from '@/lib/days'
 import { Pencil } from 'lucide-react'
 
