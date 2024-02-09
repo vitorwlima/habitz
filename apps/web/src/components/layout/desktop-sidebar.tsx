@@ -19,7 +19,7 @@ export const DesktopSidebar: React.FC<Props> = ({ className }) => {
 	return (
 		<aside
 			className={cn(
-				'sticky hidden flex-col justify-between h-full border-r border-muted grow p-4 lg:flex lg:max-w-60 xl:max-w-72 lg:h-auto',
+				'sticky hidden flex-col justify-between h-full border-r border-muted grow p-4 lg:flex lg:w-60 lg:min-w-60 lg:max-w-60 xl:w-72 xl:min-w-72 xl:max-w-72 lg:h-auto',
 				className,
 			)}
 		>

@@ -69,7 +69,7 @@ export const DeleteHabit: React.FC<Props> = ({ habit }) => {
 
 				<DialogFooter>
 					<DialogClose asChild>
-						<Button>Cancel</Button>
+						<Button variant="outline">Cancel</Button>
 					</DialogClose>
 
 					<Button variant="destructive" onClick={handleDeleteHabit}>

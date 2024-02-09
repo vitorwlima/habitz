@@ -1,5 +1,4 @@
 import { ThemeProvider } from '@/components/theme/theme-provider'
-import { Toaster } from '@/components/ui/sonner'
 import '@/index.css'
 import { trpc } from '@/lib/trpc'
 import { routeTree } from '@/routeTree.gen'
@@ -41,7 +40,6 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
 			<trpc.Provider client={trpcClient} queryClient={queryClient}>
 				<QueryClientProvider client={queryClient}>
 					<ThemeProvider defaultTheme="light">
-						<Toaster />
 						<RouterProvider router={router} />
 					</ThemeProvider>
 				</QueryClientProvider>
