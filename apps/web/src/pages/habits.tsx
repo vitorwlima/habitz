@@ -9,7 +9,7 @@ export const Habits: React.FC = () => {
 		userId: user!.id,
 	})
 	const habits = data?.habits ?? []
-	const habitsInOrder = habits.sort((a, b) => a.order - b.order)
+	const orderedHabits = habits.sort((a, b) => a.order - b.order)
 
 	return (
 		<div>
@@ -18,7 +18,7 @@ export const Habits: React.FC = () => {
 				<HabitModal type="create" />
 			</header>
 
-			<HabitsList habits={habitsInOrder} />
+			<HabitsList habits={orderedHabits} />
 		</div>
 	)
 }

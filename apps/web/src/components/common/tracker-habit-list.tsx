@@ -36,10 +36,12 @@ export const TrackerHabitList: React.FC<Props> = ({ date }) => {
 		)
 	}
 
+	const orderedHabits = habits.sort((a, b) => a.order - b.order)
+
 	return (
 		<section>
 			<ul className="flex flex-col gap-4">
-				{habits.map((habit) => (
+				{orderedHabits.map((habit) => (
 					<TrackerHabitCard
 						key={habit.id}
 						habit={habit}

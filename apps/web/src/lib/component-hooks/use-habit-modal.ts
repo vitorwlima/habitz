@@ -80,6 +80,7 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 							name: data.name,
 							days: data.days.join(','),
 							userId: user!.id,
+							id: crypto.randomUUID(),
 						},
 					]
 
@@ -127,6 +128,18 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 		},
 	})
 
+	const handleSwitchOpen = (isOpen: boolean) => {
+		setOpen(isOpen)
+
+		if (!isOpen) {
+			if (type === 'create') {
+				reset()
+			} else {
+				reset({ ...habit, days: habit!.days.split(',') as DayValue[] })
+			}
+		}
+	}
+
 	const selectedDays = watch('days')
 	const handleSelectDay = (checked: string | boolean, day: DayValue) => {
 		if (checked) {
@@ -142,7 +155,7 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 
 	return {
 		open,
-		setOpen,
+		handleSwitchOpen,
 		register,
 		selectedDays,
 		handleSubmit,

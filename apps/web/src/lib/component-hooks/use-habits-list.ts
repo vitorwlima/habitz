@@ -3,12 +3,11 @@ import { trpc } from '@/lib/trpc'
 import { useUser } from '@clerk/clerk-react'
 import {
 	DragEndEvent,
-	KeyboardSensor,
 	PointerSensor,
 	useSensor,
 	useSensors,
 } from '@dnd-kit/core'
-import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
+import { arrayMove } from '@dnd-kit/sortable'
 import { useQueryClient } from '@tanstack/react-query'
 import { getQueryKey } from '@trpc/react-query'
 import { toast } from 'sonner'
@@ -24,9 +23,6 @@ export const useHabitsList = ({ habits }: Props) => {
 			activationConstraint: {
 				distance: 10,
 			},
-		}),
-		useSensor(KeyboardSensor, {
-			coordinateGetter: sortableKeyboardCoordinates,
 		}),
 	)
 

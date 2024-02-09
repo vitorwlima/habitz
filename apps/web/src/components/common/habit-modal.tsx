@@ -32,7 +32,7 @@ export type Props =
 export const HabitModal: React.FC<Props> = ({ type, habit }) => {
 	const {
 		open,
-		setOpen,
+		handleSwitchOpen,
 		register,
 		selectedDays,
 		handleSubmit,
@@ -40,7 +40,7 @@ export const HabitModal: React.FC<Props> = ({ type, habit }) => {
 	} = useHabitModal({ type, habit })
 
 	return (
-		<Dialog open={open} onOpenChange={setOpen}>
+		<Dialog open={open} onOpenChange={handleSwitchOpen}>
 			{type === 'create' ? (
 				<Button asChild>
 					<DialogTrigger>New Habit</DialogTrigger>
