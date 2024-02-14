@@ -9,7 +9,7 @@ new Elysia()
 	.use(
 		cors({
 			credentials: true,
-			origin: /localhost.*/,
+			origin: true,
 		}),
 	)
 	.use(
