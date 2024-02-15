@@ -4,6 +4,8 @@ import postgres from 'postgres'
 import { env } from '../env'
 
 const migrationClient = postgres(env.DATABASE_URL, { max: 1 })
-migrate(drizzle(migrationClient), {
+await migrate(drizzle(migrationClient), {
 	migrationsFolder: './src/db/drizzle',
 })
+
+migrationClient.end()
