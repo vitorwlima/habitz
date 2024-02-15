@@ -1,9 +1,9 @@
 import { useTheme } from '@/components/theme/theme-provider'
+import { Toaster } from '@/components/ui/sonner'
 import { getDateObject } from '@/lib/get-date-object'
 import { getFormattedDate } from '@/lib/get-formatted-date'
 import { router } from '@/main'
 import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { Toaster } from 'sonner'
 
 export const Route = createRootRoute({
 	component: () => {

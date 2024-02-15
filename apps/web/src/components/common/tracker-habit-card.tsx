@@ -46,7 +46,6 @@ export const TrackerHabitCard: React.FC<Props> = ({
 				)}
 				<TooltipTrigger>
 					<Card
-						key={habit.id}
 						className={cn(
 							'flex items-center justify-between p-6 transition-colors',
 							{

@@ -10,7 +10,7 @@ export const Header: React.FC = () => {
 				<h1 className="font-semibold text-2xl">Habitz</h1>
 				<div className="flex items-center gap-2">
 					<ThemeToggle />
-					<SheetTrigger>
+					<SheetTrigger asChild>
 						<Button variant="outline" size="icon" className="flex lg:hidden">
 							<Menu className="h-[1.2rem] w-[1.2rem]" />
 						</Button>

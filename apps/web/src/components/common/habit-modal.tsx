@@ -42,15 +42,15 @@ export const HabitModal: React.FC<Props> = ({ type, habit }) => {
 	return (
 		<Dialog open={open} onOpenChange={handleSwitchOpen}>
 			{type === 'create' ? (
-				<Button asChild>
-					<DialogTrigger>New Habit</DialogTrigger>
-				</Button>
+				<DialogTrigger asChild>
+					<Button>New Habit</Button>
+				</DialogTrigger>
 			) : (
-				<Button variant="ghost" className="px-3 py-1" asChild>
-					<DialogTrigger>
+				<DialogTrigger asChild>
+					<Button variant="ghost" className="px-3 py-1">
 						<Pencil size={16} />
-					</DialogTrigger>
-				</Button>
+					</Button>
+				</DialogTrigger>
 			)}
 			<DialogContent>
 				<DialogHeader>
@@ -67,7 +67,7 @@ export const HabitModal: React.FC<Props> = ({ type, habit }) => {
 						<Label>Days</Label>
 						<div className="space-y-3">
 							{allDaysList.map((day) => (
-								<div className="flex items-center space-x-2">
+								<div key={day.value} className="flex items-center space-x-2">
 									<Checkbox
 										id={day.value}
 										onCheckedChange={(e) =>

@@ -51,11 +51,11 @@ export const DeleteHabit: React.FC<Props> = ({ habit }) => {
 
 	return (
 		<Dialog>
-			<Button variant="destructive" className="px-3 py-1" asChild>
-				<DialogTrigger>
+			<DialogTrigger asChild>
+				<Button variant="destructive" className="px-3 py-1">
 					<Trash size={16} />
-				</DialogTrigger>
-			</Button>
+				</Button>
+			</DialogTrigger>
 
 			<DialogContent>
 				<DialogHeader>

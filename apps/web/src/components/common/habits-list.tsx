@@ -5,6 +5,7 @@ import {
 	TableCaption,
 	TableHead,
 	TableHeader,
+	TableRow,
 } from '@/components/ui/table'
 import { useHabitsList } from '@/lib/component-hooks/use-habits-list'
 import { DndContext, closestCenter } from '@dnd-kit/core'
@@ -34,9 +35,11 @@ export const HabitsList: React.FC<Props> = ({ habits }) => {
 		<Table>
 			<TableCaption>A list of all your created habits.</TableCaption>
 			<TableHeader>
-				<TableHead className="w-96">Name</TableHead>
-				<TableHead className="w-96">Days</TableHead>
-				<TableHead className="w-48">Actions</TableHead>
+				<TableRow>
+					<TableHead className="w-96">Name</TableHead>
+					<TableHead className="w-96">Days</TableHead>
+					<TableHead className="w-48">Actions</TableHead>
+				</TableRow>
 			</TableHeader>
 
 			<TableBody>
@@ -50,7 +53,7 @@ export const HabitsList: React.FC<Props> = ({ habits }) => {
 						strategy={verticalListSortingStrategy}
 					>
 						{habits.map((habit) => (
-							<HabitsListItem key={`list-${habit.id}`} habit={habit} />
+							<HabitsListItem key={`list-${habit.name}`} habit={habit} />
 						))}
 					</SortableContext>
 				</DndContext>
