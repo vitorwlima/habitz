@@ -16,7 +16,6 @@ export const createHabit = publicProcedure
 		const habit = await db
 			.insert(habits)
 			.values({
-				id: crypto.randomUUID(),
 				name: input.name,
 				days: input.days.join(','),
 				order: input.order,

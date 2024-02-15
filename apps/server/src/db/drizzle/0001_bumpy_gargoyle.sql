@@ -1,1 +1,0 @@
-ALTER TABLE habits ADD `order` integer NOT NULL;

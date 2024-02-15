@@ -22,7 +22,7 @@ const habitSchema = z.object({
 		.max(7),
 })
 
-export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
+export const useHabitModal = ({ type, habit }: Omit<Props, ''>) => {
 	const { user } = useUser()
 	const [open, setOpen] = useState(false)
 	const queryClient = useQueryClient()
@@ -31,7 +31,7 @@ export const useHabitModal = ({ type, habit }: Omit<Props, 'children'>) => {
 	})
 	const createHabitMutation = trpc.habit.createHabit.useMutation()
 	const updateHabitMutation = trpc.habit.updateHabit.useMutation()
-	const habitsKey = getQueryKey(trpc.habit.getHabits)
+	const habitsKey = getQueryKey(trpc.habit.getHabits, { userId: user!.id })
 
 	const { register, watch, setValue, handleSubmit, reset } = useZodForm({
 		schema: habitSchema,

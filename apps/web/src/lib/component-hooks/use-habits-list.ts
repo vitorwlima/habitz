@@ -16,7 +16,7 @@ export const useHabitsList = ({ habits }: Props) => {
 	const { user } = useUser()
 	const { mutate } = trpc.habit.changeHabitsOrder.useMutation()
 	const queryClient = useQueryClient()
-	const habitsKey = getQueryKey(trpc.habit.getHabits)
+	const habitsKey = getQueryKey(trpc.habit.getHabits, { userId: user!.id })
 
 	const sensors = useSensors(
 		useSensor(PointerSensor, {

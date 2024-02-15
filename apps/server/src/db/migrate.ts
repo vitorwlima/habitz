@@ -1,4 +1,9 @@
-import { migrate } from 'drizzle-orm/bun-sqlite/migrator'
-import { db } from '.'
+import { drizzle } from 'drizzle-orm/postgres-js'
+import { migrate } from 'drizzle-orm/postgres-js/migrator'
+import postgres from 'postgres'
+import { env } from '../env'
 
-migrate(db, { migrationsFolder: './src/db/drizzle' })
+const migrationClient = postgres(env.DATABASE_URL, { max: 1 })
+migrate(drizzle(migrationClient), {
+	migrationsFolder: './src/db/drizzle',
+})

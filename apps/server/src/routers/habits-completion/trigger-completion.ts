@@ -34,7 +34,6 @@ export const triggerCompletion = publicProcedure
 		const completion = await db
 			.insert(habitsCompletions)
 			.values({
-				id: crypto.randomUUID(),
 				habitId: input.habitId,
 				userId: input.userId,
 				date: input.date,

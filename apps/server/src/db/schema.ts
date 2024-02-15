@@ -1,13 +1,19 @@
 import { relations } from 'drizzle-orm'
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { integer, pgTable, text, unique, uuid } from 'drizzle-orm/pg-core'
 
-export const habits = sqliteTable('habits', {
-	id: text('id').primaryKey(),
-	name: text('name').notNull(),
-	days: text('days').notNull(),
-	userId: text('user_id').notNull(),
-	order: integer('order').notNull(),
-})
+export const habits = pgTable(
+	'habits',
+	{
+		id: uuid('id').primaryKey().defaultRandom(),
+		name: text('name').notNull(),
+		days: text('days').notNull(),
+		userId: text('user_id').notNull(),
+		order: integer('order').notNull(),
+	},
+	(t) => ({
+		unique: unique().on(t.name, t.userId),
+	}),
+)
 
 export const habitsRelations = relations(habits, ({ many }) => ({
 	completions: many(habitsCompletions),
@@ -15,9 +21,11 @@ export const habitsRelations = relations(habits, ({ many }) => ({
 
 export type Habit = typeof habits.$inferSelect
 
-export const habitsCompletions = sqliteTable('habits_completions', {
-	id: text('id').primaryKey(),
-	habitId: text('habit_id').notNull(),
+export const habitsCompletions = pgTable('habits_completions', {
+	id: uuid('id').primaryKey().defaultRandom(),
+	habitId: uuid('habit_id')
+		.notNull()
+		.references(() => habits.id, { onDelete: 'cascade' }),
 	date: text('date').notNull(),
 	completed: integer('completed').notNull(),
 	userId: text('user_id').notNull(),

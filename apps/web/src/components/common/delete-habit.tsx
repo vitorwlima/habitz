@@ -26,7 +26,7 @@ type Props = {
 export const DeleteHabit: React.FC<Props> = ({ habit }) => {
 	const queryClient = useQueryClient()
 	const deleteHabitMutation = trpc.habit.deleteHabit.useMutation()
-	const habitsKey = getQueryKey(trpc.habit.getHabits)
+	const habitsKey = getQueryKey(trpc.habit.getHabits, { userId: habit.userId })
 
 	const handleDeleteHabit = () => {
 		deleteHabitMutation.mutate({
